@@ -1,0 +1,150 @@
+* {
+    padding: 0;
+    margin: 0;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style-type: none;
+    outline: none;
+}
+body {
+    width:100%;
+}
+#okvir{
+    width:95%;
+    margin: 0px auto;
+}
+#navbar{
+    width:100%;
+    display:flex;
+    margin-top: 10px;
+    position: fixed;
+    top: -20px;
+    width: 100%;
+    transition: top 0.3s;
+    background-color:white;
+}
+#meni{
+    width:70%;
+}
+.nav{
+    margin-left: 10%;
+    list-style-type: none;
+    display: flex;
+    justify-content: space-around;
+    width: 80%;
+    margin-top: 3%;
+}
+.nav a{
+    text-decoration: none;
+    display: inline-block;
+    padding: 5px;
+    color: black;
+    font-size:21px;
+}
+.boja{
+    color: #d4ba7a;
+}
+#naziv h1{
+    margin-left: 18%;
+    float: left;
+    width:100%;
+    padding:2%;
+    color:black;
+    font-size: 40px;
+    font-family: 'Dancing Script', cursive;
+    margin-top:1%;
+}
+#naziv{
+    width:30%;
+}
+#meni ul li a:hover{
+    opacity: 0.6;
+    border-bottom:4px solid #d4ba7a;
+}
+#sredina{
+    width:100%;
+    padding-top: 5px;
+}
+#slajder{
+    width: 100%;
+    margin-top:5%;
+    overflow: hidden;
+    height:auto;
+}
+#slajder img{
+    display: none;
+    width: 90%;
+    margin:0px auto;
+    border-radius: 3%;
+}
+#slajder .prikazi{
+    display: block;
+}
+#about-us,#naslov{
+    position: relative;
+    padding: 100px 35px ;
+    text-align: center;
+    margin-top: 3%;
+}  
+#about-us h2,#naslov h2{
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    margin-bottom: 10px;
+    padding-top: 1%;
+} 
+#about-us h3{
+    font-size: 40px;
+}
+.section-title::after {
+    position: absolute;
+    content: "";
+    width: 2px;
+    height: 100px;
+    top: 0;
+    left: 50%;
+    margin-left: 1px;
+    background-color: #d4ba7a;
+}
+#sadrzaj{
+    display: flex;
+    justify-content: center;
+}
+.tekst{
+    width: 30%;
+}
+.tekst img{
+    width: 90%;
+    margin-left: 4%;
+    height: 90%;
+}
+.tekst p{
+    text-align: center;
+    margin-top: 50%;
+}
+#gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.fancybox {
+    margin: 10px;
+    transition: transform 0.2s;
+    width: calc(33.33% - 20px); /* Širina 33.33% sa margina 10px sa obe strane */
+    box-sizing: border-box;
+}
+
+.fancybox img {
+    width: 90%;
+    height: 90%;
+    margin-left: 6%;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+@media screen and (max-width: 768px) {
+    .fancybox {
+        width: calc(50% - 20px); /* Na manjim ekranima, postavljamo širinu na 50% */
+    }
+}
