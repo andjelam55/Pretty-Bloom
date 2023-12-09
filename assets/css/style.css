@@ -78,21 +78,20 @@ body {
     margin-top:6%;
     overflow: hidden;
     height:auto;
+    display: flex;
+    justify-content: center;
 }
 #slajder img{
-    display: none;
     width: 90%;
     margin:0px auto;
     border-radius: 3%;
-}
-#slajder .prikazi{
-    display: block;
 }
 #about-us,#naslov{
     position: relative;
     padding: 100px 35px ;
     text-align: center;
     margin-top: 3%;
+    z-index: -10;
 }  
 #about-us h2,#naslov h2{
     text-transform: uppercase;
@@ -100,7 +99,7 @@ body {
     margin-bottom: 10px;
     padding-top: 1%;
     margin-left: 1%;
-    z-index: -10;
+    
 } 
 #about-us h3{
     font-size: 40px;

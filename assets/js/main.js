@@ -2,8 +2,8 @@ window.onload=function(){
     header();
 }
     function header(){
-    var nizMeni=["index.html", "about-us.html", "gallery.html",
-    "contact.html","author.html"];
+    var nizMeni=["#okvir", "#about-us", "#naslov1",
+    "#naslov2","author.html"];
     var nizNaziv=["Home", "About us", "Gallery", "Contact", "Author"];
     var divLista=document.getElementById("meni");
     var ispis="<ul class='nav'>";
@@ -13,6 +13,17 @@ window.onload=function(){
         }
     ispis+="</ul>";
     divLista.innerHTML=ispis;
+    }
+
+    let srcSlajder=['assets/img/pocetna.jpg','assets/img/pocetna1.jpg'];
+    setInterval(promeniPozadinu,4000);
+    let trenutnaSlika=1;
+    function promeniPozadinu(){
+        let slajder=document.querySelector("#slajder-slike");
+        
+        slajder.src = srcSlajder[trenutnaSlika];
+        trenutnaSlika = (trenutnaSlika+1) % srcSlajder.length;
+        console.log(srcSlajder[trenutnaSlika]);
     }
 
     document.addEventListener("DOMContentLoaded", function() {
@@ -51,9 +62,6 @@ window.onload=function(){
             loop: true
         });
     });
-
-
-
 
     document.addEventListener("DOMContentLoaded", function () {
         var flowerOrderFormContainer = document.getElementById("flowerOrderFormContainer");
