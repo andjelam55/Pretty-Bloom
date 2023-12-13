@@ -86,14 +86,14 @@ body {
     margin:0px auto;
     border-radius: 3%;
 }
-#about-us,#naslov{
+#about-us,#naslov,#naslov2,#naslov3{
     position: relative;
     padding: 100px 35px ;
     text-align: center;
     margin-top: 3%;
     z-index: -10;
 }  
-#about-us h2,#naslov h2{
+#about-us h2,#naslov h2,#naslov2 h2,#naslov3 h2{
     text-transform: uppercase;
     letter-spacing: 5px;
     margin-bottom: 10px;
@@ -156,13 +156,14 @@ body {
 
 @media screen and (max-width: 768px) {
     .fancybox {
-        width: calc(50% - 20px); /* Na manjim ekranima, postavljamo širinu na 50% */
+        width: calc(50% - 20px);
     }
 }
 #flowerOrderFormContainer {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
 }
+
 #flowerOrderForm {
     max-width: 400px;
     margin: 0 auto;
@@ -171,26 +172,22 @@ body {
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-
 label {
     display: block;
     margin-bottom: 8px;
     color: #333;
 }
-
 input, select, textarea {
     width: 100%;
     padding: 8px;
     margin-bottom: 16px;
     box-sizing: border-box;
 }
-
 .error-message {
     color: red;
     margin-top: -8px;
     margin-bottom: 16px;
 }
-
 button {
     background-color: #4caf50;
     color: white;
@@ -199,7 +196,57 @@ button {
     border-radius: 4px;
     cursor: pointer;
 }
-
 button:hover {
     background-color: #45a049;
 }
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 30px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10%;
+}
+footer a {
+    color: white;
+    text-decoration: none;
+    margin:10px;
+}
+footer a:hover {
+    text-decoration: underline;
+}
+
+footer img {
+    width: 30px;
+    height: 30px;
+}
+#author {
+    display: flex;
+    max-width: 800px;
+    margin: 50px auto;
+}
+#author-image {
+    flex: 1;
+    text-align: center;
+}
+img {
+    max-width: 90%;
+    border-radius: 12px;
+}
+#author-info {
+    flex: 1;
+    margin-top: 20%;
+    margin-left: 15%;
+}
+#author-school {
+    text-align: center;
+}
+#author-name{
+    text-align: center;
+    color: #d4ba7a;
+    font-size: 25px;
+    margin-bottom: 5%;
+}
+

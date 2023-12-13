@@ -2,8 +2,8 @@ window.onload=function(){
     header();
 }
     function header(){
-    var nizMeni=["#okvir", "#about-us", "#naslov1",
-    "#naslov2","author.html"];
+    var nizMeni=["#okvir", "#about-us", "#naslov",
+    "#naslov2","#naslov3"];
     var nizNaziv=["Home", "About us", "Gallery", "Contact", "Author"];
     var divLista=document.getElementById("meni");
     var ispis="<ul class='nav'>";
@@ -54,48 +54,39 @@ window.onload=function(){
             imgElement.appendChild(imgThumbnail);
             galleryContainer.appendChild(imgElement);
         });
-    
-        // Inicijalizujemo Fancybox
         $(".fancybox").fancybox({
             animationEffect: "fade",
             transitionEffect: "slide",
             loop: true
         });
     });
-
     document.addEventListener("DOMContentLoaded", function () {
         var flowerOrderFormContainer = document.getElementById("flowerOrderFormContainer");
         var flowerOrderForm = document.createElement("form");
         flowerOrderForm.id = "flowerOrderForm";
         flowerOrderFormContainer.appendChild(flowerOrderForm);
 
-        // Dodavanje polja za unos i labela
-        addFormField("Ime i Prezime:", "text", "customerName", true);
-        addFormField("Email:", "email", "customerEmail", true);
-        addFormField("Telefon:", "tel", "customerPhone", true);
-        
-        // Dodavanje polja za izbor buketa
+        addFormField("Ime i Prezime:", "text", "customerName", true, "Unesite ispravno ime i prezime.");
+        addFormField("Email:", "email", "customerEmail", true, "Unesite ispravan email.");
+        addFormField("Telefon:", "tel", "customerPhone", true, "Unesite ispravan broj telefona.");
+
         addSelectField("Izaberite Buket:", "bouquetType", ["Romantični Buket", "Prolećni Buket", "Ekskluzivni Buket"]);
 
-        // Dodavanje polja za unos datuma dostave
         addDateField("Datum Dostave:", "deliveryDate");
 
-        // Dodavanje polja za dodatne napomene
         addTextAreaField("Dodatne Napomene:", "additionalNotes");
 
-        // Dodavanje div-a za prikazivanje grešaka
         var errorContainer = document.createElement("div");
         errorContainer.className = "error-message";
         flowerOrderForm.appendChild(errorContainer);
 
-        // Dodavanje dugmeta za slanje
         var submitButton = document.createElement("button");
         submitButton.type = "button";
         submitButton.textContent = "Naruči Buket";
         submitButton.addEventListener("click", validateForm);
         flowerOrderForm.appendChild(submitButton);
 
-        function addFormField(labelText, inputType, inputId, isRequired) {
+        function addFormField(labelText, inputType, inputId, isRequired, validationMessage) {
             var label = document.createElement("label");
             label.textContent = labelText;
             flowerOrderForm.appendChild(label);
@@ -107,6 +98,8 @@ window.onload=function(){
             if (isRequired) {
                 input.setAttribute("required", "true");
             }
+            input.setAttribute("pattern", ".*\\S.*");
+            input.setAttribute("title", validationMessage);
             flowerOrderForm.appendChild(input);
         }
 
@@ -150,7 +143,7 @@ window.onload=function(){
             var textarea = document.createElement("textarea");
             textarea.id = textareaId;
             textarea.name = textareaId;
-            textarea.rows = 4; // Prilagodi visinu textarea-e prema potrebama
+            textarea.rows = 3;
             flowerOrderForm.appendChild(textarea);
         }
 
@@ -162,59 +155,92 @@ window.onload=function(){
             var deliveryDate = document.getElementById("deliveryDate").value;
             var additionalNotes = document.getElementById("additionalNotes").value;
             var errorText = "";
-
-            // Validacija
-            if (customerName.trim() === "") {
-                errorText += "Unesite ime i prezime.\n";
-            }
-
-            if (customerEmail.trim() === "") {
-                errorText += "Unesite email.\n";
-            } else if (!validateEmail(customerEmail)) {
-                errorText += "Unesite validan email.\n";
-            }
-
-            if (customerPhone.trim() === "") {
-                errorText += "Unesite telefon.\n";
-            } else if (!validatePhone(customerPhone)) {
-                errorText += "Unesite validan broj telefona.\n";
-            }
-
-            if (bouquetType === "") {
-                errorText += "Izaberite vrstu buketa.\n";
-            }
-
-            if (deliveryDate.trim() === "") {
-                errorText += "Unesite datum dostave.\n";
-            }
-
-            // Prikazivanje grešaka
-            errorContainer.textContent = errorText;
-
-            // Ako nema grešaka, može se izvršiti naručivanje
-            if (errorText === "") {
-                // Ovde možeš dodati logiku za naručivanje buketa, slanje podataka na server, ili šta god ti treba
-                console.log("Ime i Prezime: " + customerName);
-                console.log("Email: " + customerEmail);
-                console.log("Telefon: " + customerPhone);
-                console.log("Vrsta Buketa: " + bouquetType);
-                console.log("Datum Dostave: " + deliveryDate);
-                console.log("Dodatne Napomene: " + additionalNotes);
-
-                // Očisti polja nakon uspešnog naručivanja
-                document.getElementById("flowerOrderForm").reset();
-            }
+        
+        if (!validateName(customerName)) {
+            errorText += "Unesite ispravno ime i prezime (najmanje 3 slova, početak velikim slovom).\n";
         }
 
-        // Funkcija za validaciju email adrese
-        function validateEmail(email) {
-            var re = /\S+@\S+\.\S+/;
-            return re.test(email);
+        if (!validateEmail(customerEmail)) {
+            errorText += "Unesite validan email (@gmail.com).\n";
         }
 
-        // Funkcija za validaciju broja telefona
-        function validatePhone(phone) {
-            var re = /^\d{10}$/; // Primer: 1234567890
-            return re.test(phone);
+        if (!validatePhone(customerPhone)) {
+            errorText += "Unesite validan broj telefona (najviše 10 cifara).\n";
         }
+
+        if (bouquetType === "") {
+            errorText += "Izaberite vrstu buketa.\n";
+        }
+
+        if (deliveryDate.trim() === "") {
+            errorText += "Unesite datum dostave.\n";
+        }
+
+        errorContainer.textContent = errorText;
+
+        if (errorText === "") {
+            console.log("Ime i Prezime: " + customerName);
+            console.log("Email: " + customerEmail);
+            console.log("Telefon: " + customerPhone);
+            console.log("Vrsta Buketa: " + bouquetType);
+            console.log("Datum Dostave: " + deliveryDate);
+            console.log("Dodatne Napomene: " + additionalNotes);
+
+            document.getElementById("flowerOrderForm").reset();
+        }
+    }
+
+    function validateName(name) {
+        var re = /^[A-Z][a-z]{2,}$/; 
+        return re.test(name);
+    }
+
+    function validateEmail(email) {
+        var re = /\S+@\S+\.\S+/;
+        return re.test(email);
+    }
+
+    function validatePhone(phone) {
+        var re = /^\d{1,10}$/; 
+        return re.test(phone);
+    }
+});
+
+    var footer = document.createElement("footer");
+    var siteName = document.createElement("div");
+    var pageLinks = document.createElement("div");
+    var socialIcons = document.createElement("div");
+    
+    siteName.innerHTML = "<p>Pretty Bloom</p>";
+    
+    var pages = ["Home", "About-us", "Gallery", "Contact", "Author"];
+    for (var i = 0; i < pages.length; i++) {
+        var pageLink = document.createElement("a");
+        pageLink.href = pages[i].toLowerCase() + ".html";
+        pageLink.textContent = pages[i];
+        pageLinks.appendChild(pageLink);
+    }
+    
+    var instagramIcon = document.createElement("a");
+    instagramIcon.href = "https/www.instagram.com"; // Dodajte link 
+    instagramIcon.innerHTML = '<img src="path/to/instagram-icon.png" alt="Instagram">';
+    
+    var facebookIcon = document.createElement("a");
+    facebookIcon.href = "https/www.facebook.com"; // Dodajte link ka Facebook stranici
+    facebookIcon.innerHTML = '<img src="path/to/facebook-icon.png" alt="Facebook">';
+    
+    socialIcons.appendChild(instagramIcon);
+    socialIcons.appendChild(facebookIcon);
+    
+    footer.appendChild(siteName);
+    footer.appendChild(pageLinks);
+    footer.appendChild(socialIcons);
+    
+    document.body.appendChild(footer);
+
+    document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("author-img").src = "assets/img/author.jpg";
+        document.getElementById("author-name").textContent = "Andjela Mitrovic 136/22";
+        document.getElementById("author-school").textContent = "Hello,I was born on December 15, 2003, in Brus. Currently, I live in Belgrade. I have completed high school at the School of Economics. Currently, I am studying at the Faculty of ICT";
+
     });
